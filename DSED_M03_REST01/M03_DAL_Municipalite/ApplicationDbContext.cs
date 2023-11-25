@@ -13,6 +13,8 @@ namespace M03_DAL_Municipalite
 
         public DbSet<ElectionDTO>? ELECTION { get; set; }
 
+        public DbSet<ClefAPI>? CLEFAPI { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
