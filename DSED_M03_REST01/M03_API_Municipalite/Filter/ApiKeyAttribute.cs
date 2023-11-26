@@ -13,20 +13,21 @@ namespace M03_API_Municipalite.Filter
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class ApiKeyAttribute : Attribute, IAsyncActionFilter
     {
-        ApplicationDbContext m_applicationDbContext;
-        const string clefValide = "59604896-66a4-4a9b-8f7b-94a5d16bbdaf";
+        //const string clefValide = "59604896-66a4-4a9b-8f7b-94a5d16bbdaf";
         public async Task OnActionExecutionAsync(ActionExecutingContext p_context, ActionExecutionDelegate p_next)
         {
             ApplicationDbContext appContext = p_context.HttpContext.RequestServices.GetService<ApplicationDbContext>();
+            DepotMunicipalitesSQL m_depotMunicipalitesSQL = new DepotMunicipalitesSQL(appContext);
 
             StringValues clefAPI;
+
             if (!p_context.HttpContext.Request.Headers.TryGetValue("clefAPI", out clefAPI))
             {
                 p_context.Result = new UnauthorizedResult();
                 return;
             }
 
-            if (!clefValide.Equals(clefAPI))
+            if (!m_depotMunicipalitesSQL.IsValidKey(Guid.Parse(clefAPI)))
             {
                 p_context.Result = new UnauthorizedResult();
                 return;
