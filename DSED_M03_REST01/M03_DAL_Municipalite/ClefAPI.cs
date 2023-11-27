@@ -10,7 +10,7 @@ namespace M03_DAL_Municipalite
     public class ClefAPI
     {
         [Key]
-        public Guid ClefAPIId;
+        public Guid ClefAPIId { get; set; }
         public ClefAPI() { }
 
         public ClefAPI(Guid p_clef)

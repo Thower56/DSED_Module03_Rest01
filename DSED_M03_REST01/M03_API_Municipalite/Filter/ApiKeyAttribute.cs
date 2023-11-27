@@ -14,6 +14,7 @@ namespace M03_API_Municipalite.Filter
     public class ApiKeyAttribute : Attribute, IAsyncActionFilter
     {
         //const string clefValide = "59604896-66a4-4a9b-8f7b-94a5d16bbdaf";
+
         public async Task OnActionExecutionAsync(ActionExecutingContext p_context, ActionExecutionDelegate p_next)
         {
             ApplicationDbContext appContext = p_context.HttpContext.RequestServices.GetService<ApplicationDbContext>();
